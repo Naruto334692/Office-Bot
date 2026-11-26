@@ -11,8 +11,9 @@ import {
   useSyncExternalStore,
 } from "react";
 import { AppState, Button, Platform, Text, View } from "react-native";
-import { en, formatText, type MobileKey, type TextVars, zh } from "../i18n/messages.ts";
+import { en, formatText, type MobileKey, type TextVars, ru, zh } from "../i18n/messages.ts";
 import { androidEn, androidZh } from "../i18n/sections/android.ts";
+import { androidRu } from "../i18n/sections/russian.ts";
 import { useDisplay } from "../theme/display.tsx";
 import { useTheme } from "../theme/use-theme.ts";
 import { mobileOwner } from "./bootstrap.ts";
@@ -26,8 +27,15 @@ export function useLanguage() {
 }
 export function useText() {
   const language = useLanguage();
-  const android = Platform.OS === "android" ? (language === "zh" ? androidZh : androidEn) : {};
-  const table = language === "zh" ? zh : en;
+  const android =
+    Platform.OS === "android"
+      ? language === "zh"
+        ? androidZh
+        : language === "ru"
+          ? androidRu
+          : androidEn
+      : {};
+  const table = language === "zh" ? zh : language === "ru" ? ru : en;
   return (key: MobileKey, vars?: TextVars) => formatText(android[key] ?? table[key], vars);
 }
 export function useStatusText() {

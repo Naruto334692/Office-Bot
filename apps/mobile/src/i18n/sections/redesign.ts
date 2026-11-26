@@ -22,6 +22,7 @@ export const redesignZh = {
   followSystem: "跟随系统",
   langZh: "中文",
   langEn: "English",
+  langRu: "Русский",
   themeLight: "浅色",
   themeDark: "深色",
   displaySaveFailed: "没能保存这个选择，重启后会恢复成原来的设置。",
@@ -70,6 +71,7 @@ export const redesignEn: Record<keyof typeof redesignZh, string> = {
   followSystem: "System",
   langZh: "中文",
   langEn: "English",
+  langRu: "Russian",
   themeLight: "Light",
   themeDark: "Dark",
   displaySaveFailed:

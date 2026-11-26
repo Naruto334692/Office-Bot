@@ -89,7 +89,7 @@ beforeEach(() => {
 });
 
 describe("welcome and settings static rendering", () => {
-  it.each(["zh", "en"] as const)(
+  it.each(["zh", "en", "ru"] as const)(
     "renders welcome values, switches and five progress steps in %s",
     (language) => {
       context.language = language;
@@ -104,7 +104,7 @@ describe("welcome and settings static rendering", () => {
       expect(html).not.toContain("WelcomeFlow (");
     },
   );
-  it.each(["zh", "en"] as const)(
+  it.each(["zh", "en", "ru"] as const)(
     "renders the settings destinations and a close action in %s",
     (language) => {
       context.language = language;
@@ -116,6 +116,7 @@ describe("welcome and settings static rendering", () => {
       expect(nav).toContain(t("settings.general"));
       expect(nav).toContain(t("settings.models").replaceAll("&", "&amp;"));
       expect(html).toContain(t("setup.close"));
+      expect(html).toContain(t("language.ru"));
       // 登录这台电脑时 is a segmented choice; the tray and proxy switches remain.
       expect(html.match(/role="switch"/g)).toHaveLength(2);
     },

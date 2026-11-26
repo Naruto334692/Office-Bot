@@ -1,31 +1,40 @@
 import { en } from "./en.ts";
+import { ru } from "./ru.ts";
 import { type TranslationKey, zh } from "./zh.ts";
 
 export type { ManagedResourceKey } from "@pibot/workspaces-contract/i18n";
 export { en } from "./en.ts";
+export { ru } from "./ru.ts";
 export { isolationReasonText } from "./isolation.ts";
 export { type TranslationKey, type TranslationTable, zh } from "./zh.ts";
 
-export type Language = "zh" | "en";
+export type Language = "zh" | "en" | "ru";
 export type LanguageSetting = Language | "system";
 export type TranslationVars = Readonly<Record<string, string | number>>;
 
 export function resolveLanguage(setting: LanguageSetting, systemLocale: string): Language {
-  return setting === "system"
-    ? systemLocale.toLowerCase().startsWith("zh")
-      ? "zh"
-      : "en"
-    : setting;
+  if (setting !== "system") return setting;
+  const locale = systemLocale.toLowerCase();
+  if (locale.startsWith("zh")) return "zh";
+  if (locale.startsWith("ru")) return "ru";
+  return "en";
 }
 
 // Renderer and tray menus can use different translators without shared mutable state.
 export function t(key: TranslationKey, vars?: TranslationVars, language: Language = "en"): string {
-  const table = { zh, en }[language];
-  const pluralKey =
-    typeof vars?.count === "number" && Object.hasOwn(table, `${key}.one`)
-      ? `${key}.${new Intl.PluralRules(language).select(vars.count)}`
+  const table = { zh, en, ru }[language];
+  const hasPluralForms = typeof vars?.count === "number" && Object.hasOwn(table, `${key}.one`);
+  const pluralKey = hasPluralForms
+    ? `${key}.${new Intl.PluralRules(language).select(vars.count as number)}`
+    : key;
+  // English fallback strings do not necessarily define Russian's extra plural categories
+  // (few / many). Use the catalog's generic form rather than looking up a missing key.
+  const templateKey = Object.hasOwn(table, pluralKey)
+    ? pluralKey
+    : hasPluralForms && Object.hasOwn(table, `${key}.other`)
+      ? `${key}.other`
       : key;
-  const template = table[Object.hasOwn(table, pluralKey) ? (pluralKey as TranslationKey) : key];
+  const template = table[templateKey as TranslationKey];
   return template.replace(
     /\{(\w+)\}/g,
     (placeholder: string, name: string, offset: number, whole: string) => {

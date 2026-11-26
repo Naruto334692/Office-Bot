@@ -87,6 +87,7 @@ const common = {
   "language.label": "语言",
   "language.zh": "中文",
   "language.en": "English",
+  "language.ru": "俄语",
   "language.system": "跟随系统",
   "language.note": "只改菜单和按钮的语言。Bot 用什么语言回答，看你怎么跟它说话。",
   "theme.label": "外观",

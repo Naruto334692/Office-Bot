@@ -42,6 +42,7 @@ export function DisplaySettings() {
             { value: "system", label: t("followSystem") },
             { value: "zh", label: t("langZh") },
             { value: "en", label: t("langEn") },
+            { value: "ru", label: t("langRu") },
           ]}
         />
         <Separator />
