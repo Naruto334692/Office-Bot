@@ -10,7 +10,7 @@ import { z } from "zod";
  * app from flashing the system theme first.
  */
 const DisplaySchema = z.object({
-  language: z.enum(["system", "zh", "en"]).catch("system"),
+  language: z.enum(["system", "zh", "en", "ru"]).catch("system"),
   appearance: z.enum(["system", "light", "dark"]).catch("system"),
 });
 export type DisplayPrefs = z.infer<typeof DisplaySchema>;

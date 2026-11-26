@@ -127,7 +127,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       );
   }, [language, network?.address]);
   useEffect(() => {
-    document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+    document.documentElement.lang =
+      language === "zh" ? "zh-CN" : language === "ru" ? "ru-RU" : "en";
   }, [language]);
 
   return (

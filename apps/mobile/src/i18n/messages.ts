@@ -17,6 +17,7 @@ import { redesignEn, redesignZh } from "./sections/redesign.ts";
 import { settingsEn, settingsZh } from "./sections/settings.ts";
 import { tasksEn, tasksZh } from "./sections/tasks.ts";
 import { todosEn, todosZh } from "./sections/todos.ts";
+import { mobileRu } from "./sections/russian.ts";
 
 export const nativePermissions = {
   localNetwork:
@@ -70,6 +71,7 @@ export const en: Record<MobileKey, string> = {
   ...redesignEn,
   ...todosEn,
 };
+export const ru: Record<MobileKey, string> = { ...en, ...mobileRu };
 export type TextVars = Record<string, string | number>;
 export function formatText(text: string, vars?: TextVars) {
   if (!vars) return text;

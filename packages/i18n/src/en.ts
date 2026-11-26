@@ -88,6 +88,7 @@ const common = {
   "language.label": "Language",
   "language.zh": "中文",
   "language.en": "English",
+  "language.ru": "Russian",
   "language.system": "System",
   "language.note": "Changes menus and buttons only. Bots reply in the language you use.",
   "theme.label": "Appearance",

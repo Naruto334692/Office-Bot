@@ -53,7 +53,7 @@ export function GeneralSettings() {
             label={t("language.label")}
             disabled={disabled}
             value={settings?.language ?? "system"}
-            options={(["system", "zh", "en"] as const).map((value) => ({
+            options={(["system", "zh", "en", "ru"] as const).map((value) => ({
               value,
               label: t(`language.${value}`),
             }))}

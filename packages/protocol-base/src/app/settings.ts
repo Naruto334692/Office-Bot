@@ -41,7 +41,7 @@ export const SettingsSchema = z.strictObject({
    * models). Without it a priced cap would never apply to them; default is 2,000,000 tokens.
    */
   memoryExtractionDailyTokens: z.number().int().min(0).max(100_000_000).optional(),
-  language: z.enum(["system", "zh", "en"]),
+  language: z.enum(["system", "zh", "en", "ru"]),
   theme: z.enum(["system", "light", "dark"]),
   onboardingCompleted: z.boolean(),
   openAtLogin: z.boolean(),
